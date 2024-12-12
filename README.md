@@ -52,3 +52,60 @@ Here's an outline of the main points discussed in the podcast:
    - AI-native businesses leveraging generative feedback loops
 
 The podcast concludes with a mention of an upcoming event in New York City where these topics will be further discussed.
+
+### "Make a viral Linkedin post out of the podcast."
+
+🚀 Exciting times in AI! Just wrapped up an incredible podcast on Agentic RAG with @Erica Cardenas from Weaviate. Here are the key takeaways:
+
+1️⃣ Agentic RAG is revolutionizing how we interact with data, going beyond traditional retrieval-augment-generate pipelines.
+
+2️⃣ Multi-agent systems are the future, allowing for specialized roles and more efficient problem-solving.
+
+3️⃣ The importance of short-term and long-term memory in AI agents can't be overstated.
+
+4️⃣ Evaluation and observability tools are crucial for building trust and understanding in AI systems.
+
+5️⃣ Generative Feedback Loops (GFLs) are opening up new possibilities for AI-driven data creation and enhancement.
+
+🔥 Hot take: The next big leap in AI won't just be about better models, but smarter ways to combine and orchestrate them!
+
+👥 Want to dive deeper? Join us next Tuesday in NYC at the Google Pier 57 building to discuss Agentic RAG and the future of AI!
+
+#AI #AgenticRAG #MachineLearning #FutureOfTech #Weaviate
+
+What's your take on Agentic RAG? Drop your thoughts below! 👇
+
+### "Summarize the podcast as a christmas carol."
+
+🎵 On the first day of AI, Weaviate gave to me:
+An agentic RAG system with glee!
+
+On the second day of AI, Weaviate gave to me:
+Two function calls,
+And an agentic RAG system with glee!
+
+On the third day of AI, Weaviate gave to me:
+Three planning steps,
+Two function calls,
+And an agentic RAG system with glee!
+
+On the fourth day of AI, Weaviate gave to me:
+Four multi-agents,
+Three planning steps,
+Two function calls,
+And an agentic RAG system with glee!
+
+On the fifth day of AI, Weaviate gave to me:
+Five eval tools!
+Four multi-agents,
+Three planning steps,
+Two function calls,
+And an agentic RAG system with glee!
+
+On the sixth day of AI, Weaviate gave to me:
+Six loops a-generating,
+Five eval tools!
+Four multi-agents,
+Three planning steps,
+Two function calls,
+And an agentic RAG system with glee! 🎵

@@ -35,6 +35,8 @@ with open('sentiment_analysis_output.txt', 'w') as file:
 
 prompt1 = "How many times did they mention the word 'weaviate'?"
 prompt2 = "Outline the main points of the podcast."
+prompt3 = "Make a viral Linkedin post out of the podcast."
+prompt4 = "Summarize the podcast as a christmas carol."
 
 result1 = transcript.lemur.task(
    prompt1, final_model=aai.LemurModel.claude3_5_sonnet
@@ -45,5 +47,13 @@ result2 = transcript.lemur.task(
 )
 print(result2.response)
 
+result3 = transcript.lemur.task(
+    prompt3, final_model=aai.LemurModel.claude3_5_sonnet
+    )
+print(result3.response)
+result4 = transcript.lemur.task(
+    prompt4, final_model=aai.LemurModel.claude3_5_sonnet
+    )
+print(result4.response)
 with open('full_transcript.txt', 'w') as file:
     file.write(f"{transcript.text}\n")

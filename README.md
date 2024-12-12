@@ -7,6 +7,8 @@ Number of sentences: 363
 ### "How many times did they mention the word 'weaviate'?"
 The word 'weaviate' is mentioned 9 times in the transcript.
 
+--> atually I checked it's 11 times, so the LLM is wrong here, because we would need an agent for aggergation
+
 ### "Outline the main points of the podcast."
 Here's an outline of the main points discussed in the podcast:
 

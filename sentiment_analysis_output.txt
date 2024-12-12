@@ -1,0 +1,1444 @@
+Hey everyone, thank you so much for watching another episode of the weva podcast.
+SentimentType.positive
+0.99031925
+Timestamp: 27135 - 30327
+I'm super excited to welcome Erica Cardenas.
+SentimentType.positive
+0.9923976
+Timestamp: 30431 - 32879
+Erica is a technology partner manager at weaviate, where she leads the effort behind weaviate recipes and all sorts of things managing weaviate's partnerships with partners such as Google Cohere, Modal and many others.
+SentimentType.neutral
+0.60203415
+Timestamp: 32967 - 43991
+Eric and I, as well as other members from the Weaviate team, will be in New York City next Tuesday, November 19th at the Google Pier 57 building.
+SentimentType.neutral
+0.64729446
+Timestamp: 44103 - 51199
+We'd love to meet you there, so if interested in that, please see the link in the description.
+SentimentType.positive
+0.9586227
+Timestamp: 51287 - 54927
+Erica, thanks so much for joining the WEV8 podcast.
+SentimentType.positive
+0.98639363
+Timestamp: 55071 - 57431
+Awesome.
+SentimentType.positive
+0.9184248
+Timestamp: 57623 - 58103
+Thank you for having me.
+SentimentType.positive
+0.9709057
+Timestamp: 58159 - 59095
+I'm excited to talk about Agentic Rag and hopefully meet a few people at the event in New York.
+SentimentType.positive
+0.99025375
+Timestamp: 59135 - 63435
+Awesome.
+SentimentType.positive
+0.9184248
+Timestamp: 64335 - 64759
+So for our listeners who aren't aware, last week Eric and Leigh and I published a new blog post on weaviate's blogs, Agentic Rag.
+SentimentType.neutral
+0.6840408
+Timestamp: 64807 - 71799
+And so in this podcast we really want to just keep diving into Agentic Rag, explain why we think it's a why now moment for weaviate, the benefits of Agentic Rag and all these things.
+SentimentType.neutral
+0.6010015
+Timestamp: 71847 - 81713
+So, Erica, even before we kick this off, could you maybe start us from the beginning?
+SentimentType.neutral
+0.8685869
+Timestamp: 81769 - 85705
+What are agents?
+SentimentType.neutral
+0.7815343
+Timestamp: 85785 - 86965
+Yeah, awesome.
+SentimentType.positive
+0.9367395
+Timestamp: 87585 - 88265
+So I'll cover.
+SentimentType.neutral
+0.7436756
+Timestamp: 88305 - 89097
+I think it's important to first cover the components of an agent.
+SentimentType.neutral
+0.8117166
+Timestamp: 89201 - 92825
+So of course you have the language model, but then you also have the memory, whether it be short term or long term.
+SentimentType.neutral
+0.82691175
+Timestamp: 92985 - 98609
+And we've seen new frameworks like Letta come out of this with just updating its memory based off of conversation history.
+SentimentType.neutral
+0.8429046
+Timestamp: 98697 - 105641
+But then you also have planning.
+SentimentType.neutral
+0.7433522
+Timestamp: 105833 - 107545
+So.
+SentimentType.neutral
+0.6170276
+Timestamp: 107625 - 107815
+So you can have like chain of thought or sub question.
+SentimentType.neutral
+0.8625694
+Timestamp: 107845 - 111131
+I want to say sub question query engine because of Llama, but it can break down a question into sub questions before passing it on to the tool.
+SentimentType.neutral
+0.77055323
+Timestamp: 111283 - 119739
+So to query your database or do a web search, anything really, or even react, obviously is another very popular one.
+SentimentType.positive
+0.73256654
+Timestamp: 119787 - 128387
+And then of course you have tools, whether that be maybe to your database or the web search, like I said, or like the Slack API calculator, all of it.
+SentimentType.neutral
+0.7381324
+Timestamp: 128571 - 137339
+Anything that has an API, these language models can access through function calling.
+SentimentType.neutral
+0.5138354
+Timestamp: 137467 - 141455
+So yeah, that's kind of like what makes up an agent, I would say.
+SentimentType.neutral
+0.8326263
+Timestamp: 141915 - 145695
+Yeah, awesome.
+SentimentType.positive
+0.9367395
+Timestamp: 146195 - 146851
+I use the same definition of this function calling loop thing where it's just calling a function, seeing the results from the function call, and then saying, hey, have I finished the task or am I going to call more functions and continue this looping process?
+SentimentType.neutral
+0.8272712
+Timestamp: 146883 - 160299
+And I think it's really interesting Just this general distinction between that open ended looping process or hard coding some particular flow of prompts and tool use in a pipeline.
+SentimentType.positive
+0.85511684
+Timestamp: 160427 - 170831
+I like to call those compound AI systems, although I think you kind of could call an agent a compound AI system and vice versa.
+SentimentType.neutral
+0.61255765
+Timestamp: 170863 - 176455
+But this, I think these are the two kind of camps that are emerging with designing these systems.
+SentimentType.neutral
+0.7389495
+Timestamp: 176495 - 180695
+So could we.
+SentimentType.neutral
+0.7327767
+Timestamp: 180735 - 181647
+Now with this kind of function calling paradigm, could we describe how agentic rag differs from vanilla rag?
+SentimentType.neutral
+0.9023912
+Timestamp: 181671 - 188555
+Yeah, so agents differ from vanilla rag because with vanilla rag you just have the retrieve augment and then generate.
+SentimentType.neutral
+0.8472939
+Timestamp: 189105 - 196465
+It's like a very standard pipeline.
+SentimentType.neutral
+0.80133194
+Timestamp: 196625 - 198673
+So if I ask what is hybrid search?
+SentimentType.neutral
+0.85758394
+Timestamp: 198729 - 200777
+It will grab my most relevant blog chunks on hybrid search and then it will send it to the language model and it will generate a response.
+SentimentType.neutral
+0.793192
+Timestamp: 200801 - 208485
+But with agents or agentic rag, it's able to plan the required steps needed to achieve the user's query.
+SentimentType.neutral
+0.86198574
+Timestamp: 208865 - 217061
+It can of course do the sub question.
+SentimentType.neutral
+0.7986446
+Timestamp: 217253 - 219325
+It can do chain of thought reasoning before accessing those specific tools.
+SentimentType.neutral
+0.88375735
+Timestamp: 219405 - 224585
+Another cool thing is with the function calling loop that you just referred to, it can determine if it needs more information by retrieving from other sources.
+SentimentType.positive
+0.86363983
+Timestamp: 224885 - 234545
+I of course have my weaviate blog trunk stored in my Web8 database, but maybe there is some new research or something about hybrid search that is only on the web and not in my database quite yet.
+SentimentType.neutral
+0.7782475
+Timestamp: 234965 - 245793
+It's able to say, oh, I actually don't have enough context.
+SentimentType.neutral
+0.49347436
+Timestamp: 245889 - 249297
+Let me go to the web and you can maybe even have like a bigquery database as well.
+SentimentType.neutral
+0.58087915
+Timestamp: 249361 - 255205
+Anyway, yeah, probably get carried away if I keep going down that path.
+SentimentType.negative
+0.6930867
+Timestamp: 255785 - 260137
+But then of course it can call more than one tool and then summarize the results if needed.
+SentimentType.neutral
+0.8149165
+Timestamp: 260321 - 265289
+So you can go to your database, you can go to your web search, maybe even a lack conversation history.
+SentimentType.neutral
+0.8314608
+Timestamp: 265377 - 272035
+If of course you set that up as a tool.
+SentimentType.negative
+0.57325965
+Timestamp: 272455 - 274071
+It's not done automatically.
+SentimentType.neutral
+0.65663123
+Timestamp: 274103 - 275839
+People don't have to fear about their conversations.
+SentimentType.neutral
+0.67356306
+Timestamp: 275887 - 277915
+But I'd say the autonomy of these agents to be able to query different databases and just sources of information is what makes it different from vanilla rag.
+SentimentType.neutral
+0.8152198
+Timestamp: 278215 - 289435
+Yeah, I already want to take the beta, start the generative feedback loop, talking about how exciting this is going to be to be able to connect other data sources to weaviate through generative feedback loops and just flow your data through weaviate or whatever you're doing.
+SentimentType.positive
+0.92252254
+Timestamp: 290135 - 303925
+But we'll save that one for the ending.
+SentimentType.neutral
+0.78160465
+Timestamp: 303965 - 305677
+For now we're just continuing to dive into agentic rag and why it's so new.
+SentimentType.neutral
+0.81731796
+Timestamp: 305781 - 310781
+We have these benefits like you mentioned about the writing the Queries, being able to execute queries in parallel and then being able to iteratively search and then navigate, navigate different indexes as well as use filters and kind of graduate from just the search query to being able to just get objects into the database.
+SentimentType.positive
+0.6602747
+Timestamp: 310813 - 327829
+And so I think kind of the, the function calling thing that I'm still a little unclear about is this idea of planning.
+SentimentType.neutral
+0.7137908
+Timestamp: 327877 - 334981
+I'm still very unclear to me what it means by, you know, make a plan.
+SentimentType.negative
+0.53427684
+Timestamp: 335053 - 339141
+So, yeah, I love to just unpack this.
+SentimentType.positive
+0.7015311
+Timestamp: 339253 - 341181
+What do you think the role of planning is in these agent systems?
+SentimentType.neutral
+0.8901467
+Timestamp: 341213 - 344665
+Yeah, awesome.
+SentimentType.positive
+0.9367395
+Timestamp: 345165 - 346109
+Well, I think one benefit that I didn't touch on and you actually just covered is being able to navigate your database to run vector, search aggregate or filter quer.
+SentimentType.neutral
+0.5892217
+Timestamp: 346197 - 356921
+So with Vanilla Rag, if you are doing a semantic search query and you haven't hard coded a filter, you know, you're like, okay, one query can be pull my conversation history with Connor from January 10, 2024.
+SentimentType.neutral
+0.7440831
+Timestamp: 357093 - 371209
+If I were to run a semantic search query, the only thing really that would be able to retrieve is just our conversation history between us.
+SentimentType.neutral
+0.80214787
+Timestamp: 371337 - 379225
+Unless of course, the date is in the content of our message.
+SentimentType.neutral
+0.8428523
+Timestamp: 379345 - 384485
+But with Agentic Rag, it can take the user's query, say, okay, this requires a semantic search, but then it can also add some metadata filters to the query and then pass on.
+SentimentType.neutral
+0.84909475
+Timestamp: 384985 - 397205
+Call the pass on the query to the collections in that kind of sense.
+SentimentType.neutral
+0.8539915
+Timestamp: 397505 - 404325
+I think that's kind of like an interesting benefit of it.
+SentimentType.positive
+0.8751873
+Timestamp: 405145 - 408641
+And you know, in order to take the metadata property and add it to your query, a chain of thought or even a react kind of planning capability is necessary because it needs to kind of think and reason about the user's question before it can properly call the function and then run that loop in order to answer the query in the best way possible.
+SentimentType.neutral
+0.76368487
+Timestamp: 408673 - 433455
+Yeah, I think I'm just, I guess I'm really curious about how.
+SentimentType.neutral
+0.7404715
+Timestamp: 434595 - 437763
+So the react.
+SentimentType.neutral
+0.695862
+Timestamp: 437819 - 438643
+React is this sequential architecture of you always have some meta assess the state of the, of the task prompt that it does in between calling calling functions.
+SentimentType.neutral
+0.88904643
+Timestamp: 438739 - 450875
+And so I'm kind of, I'm really curious how that differs from chain of thought.
+SentimentType.neutral
+0.82330227
+Timestamp: 451375 - 454791
+If you think that these are, these really are different ideas, like, is this really a different idea?
+SentimentType.neutral
+0.77041304
+Timestamp: 454863 - 460175
+Because I, the way that I've been implementing React with function calling is I just have like thought internal state of mind is one of the required arguments.
+SentimentType.neutral
+0.82845646
+Timestamp: 460215 - 469319
+And so it kind of does like a rationale for its tool call in that sort of interface.
+SentimentType.neutral
+0.7808169
+Timestamp: 469367 - 473635
+And so I guess, yeah.
+SentimentType.neutral
+0.67566323
+Timestamp: 473815 - 475427
+Are we thinking that React and Chain of Thought are Pretty similar, yeah.
+SentimentType.neutral
+0.64081
+Timestamp: 475491 - 480175
+Interesting.
+SentimentType.positive
+0.7792785
+Timestamp: 481395 - 482295
+I'd say no, obviously, because they're two separate things, at least how I've seen it on online.
+SentimentType.neutral
+0.6523103
+Timestamp: 483195 - 490615
+So you'd say with chain of thought it's like the initial prompt to like dissect the user question.
+SentimentType.neutral
+0.85626715
+Timestamp: 491155 - 496931
+Whereas with React it's kind of more iterative and it has a loop so it will reason about its current state and then it will act in a certain way.
+SentimentType.neutral
+0.8467952
+Timestamp: 497123 - 508277
+I guess it's kind of just like a forced loop.
+SentimentType.neutral
+0.54551566
+Timestamp: 508381 - 511333
+So because it's able to act after it's like reasoned about the question, I would say it's different from chain of thought.
+SentimentType.neutral
+0.82431364
+Timestamp: 511509 - 522825
+The exact implementation of it.
+SentimentType.neutral
+0.6998963
+Timestamp: 523285 - 526945
+Not super familiar, but I would say it's like just two separate ways to do that.
+SentimentType.neutral
+0.7166301
+Timestamp: 527765 - 533385
+And I think one like thing that people have seen is with GPT4, GPT401 and how it's breaking down the user question.
+SentimentType.positive
+0.5957914
+Timestamp: 533425 - 544697
+It's kind of like spitting out what it's doing under the hood and then it's writing a whole bunch of text or generating an image and then it's able to like go back to the beginning and make sure that it stayed on track.
+SentimentType.neutral
+0.8457027
+Timestamp: 544761 - 557417
+I would say that's more of like the REACT framework and also the inventor of it is that OpenAI.
+SentimentType.neutral
+0.76717377
+Timestamp: 557561 - 565191
+So I find it likely that it's REACT under the hood for O1, but could be a theory.
+SentimentType.neutral
+0.86094695
+Timestamp: 565303 - 572367
+I don't know.
+SentimentType.neutral
+0.56667316
+Timestamp: 572471 - 573215
+Yeah, I think that comes into that.
+SentimentType.neutral
+0.7855092
+Timestamp: 573335 - 574639
+Kind of like streaming interfaces for agents and how important it is.
+SentimentType.neutral
+0.587286
+Timestamp: 574687 - 578391
+Or like agents compound AI systems.
+SentimentType.neutral
+0.7814148
+Timestamp: 578463 - 580455
+I think the abstraction here is still like up in the air, but anytime you're going to be doing this, like, you know, it's, it's going to be pretty latency heavy and you want to send something to the front end about hey, it's still alive back here.
+SentimentType.neutral
+0.75969017
+Timestamp: 580495 - 593227
+You don't want it to just be like spinning circle.
+SentimentType.neutral
+0.59617466
+Timestamp: 593251 - 596243
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 596419 - 596723
+So that inspired me to thinking about O1 and I think the chain of thought in this.
+SentimentType.neutral
+0.54710203
+Timestamp: 596739 - 601651
+I'm still kind of trying to make sense of this planning idea and they, they have this kind of like tree of thoughts algorithm.
+SentimentType.neutral
+0.68695414
+Timestamp: 601723 - 609115
+There's this thing with the mu0 algorithm that had, when they had beat the world champion go player with AI, it was about doing this like Monte Carlo tree search where you'd sort of roll out the tree, you'd have a thought and then you'd say, okay, if I do take this action, it'll take me to this state of the world.
+SentimentType.neutral
+0.7994173
+Timestamp: 609155 - 627029
+And then I could.
+SentimentType.neutral
+0.5906499
+Timestamp: 627077 - 628125
+And then from there I could do these actions and that might take me to these different States and so you kind of like unroll that tree all the way forward.
+SentimentType.neutral
+0.8594252
+Timestamp: 628165 - 635013
+And so I'm curious if you think that kind of thing could be like useful in this agent framework where you make this plan where you say, okay, I could search blogs and that might get me to this kind of information or I could search in my analytics table or something like that.
+SentimentType.neutral
+0.759323
+Timestamp: 635189 - 650055
+Like so I'm still trying to make sense of what the analogy might be with this tree reasoning and then this kind of like agentic rag system.
+SentimentType.neutral
+0.6715823
+Timestamp: 650095 - 657475
+Hmm.
+SentimentType.neutral
+0.6434747
+Timestamp: 658055 - 658875
+Well, when did that come out?
+SentimentType.neutral
+0.7677771
+Timestamp: 659175 - 660799
+When was that released?
+SentimentType.neutral
+0.87134093
+Timestamp: 660847 - 662247
+I can't remember.
+SentimentType.neutral
+0.5250566
+Timestamp: 662431 - 663071
+It was a while ago.
+SentimentType.neutral
+0.78024054
+Timestamp: 663103 - 663735
+Right.
+SentimentType.neutral
+0.56647503
+Timestamp: 663775 - 664355
+I think the mu0 thing was quite a while ago.
+SentimentType.neutral
+0.8675014
+Timestamp: 665735 - 667847
+And then I think tree of thoughts.
+SentimentType.neutral
+0.7987106
+Timestamp: 667871 - 669655
+I see Tree of thought, it's Googled it.
+SentimentType.neutral
+0.73493254
+Timestamp: 669775 - 671079
+I see it's at 2023.
+SentimentType.neutral
+0.85720724
+Timestamp: 671087 - 672879
+Also Shen Yao from the react, Shen Yu from the REACT paper also did that one like a side project, I think I would say with tree of thought it kind of sounds more resource heavy.
+SentimentType.neutral
+0.77476597
+Timestamp: 673007 - 690887
+I would say in the initial stage, like it requires creating like a massive sense of self and like kind of like the different rabbit holes that you can go to or enter.
+SentimentType.neutral
+0.7677048
+Timestamp: 690951 - 702677
+Whereas with react, I feel like it's kind of like quick on its feet, if you would say, because it's able to like reason, act and then it's like, oh no, that wasn't right.
+SentimentType.negative
+0.5734457
+Timestamp: 702781 - 711741
+Let me reason again and then act.
+SentimentType.neutral
+0.82480764
+Timestamp: 711773 - 713125
+I feel like that's kind of faster than projecting kind of the what ifs in that sense.
+SentimentType.neutral
+0.71719825
+Timestamp: 713165 - 719625
+Yeah, but yeah, yeah, it's really, I guess like taking like the reinforcement learning setting.
+SentimentType.neutral
+0.6434999
+Timestamp: 720285 - 726421
+You have this loop where it's like the agent and then the environment and at each step the agent can send a action and then it receives the next state in a potential reward.
+SentimentType.neutral
+0.8876986
+Timestamp: 726453 - 735697
+And so I think that's with our function calls.
+SentimentType.neutral
+0.86461633
+Timestamp: 735841 - 737745
+Like each function call is like an action and then you're taken to the next state of the results of the function call.
+SentimentType.neutral
+0.8550343
+Timestamp: 737785 - 742529
+And so from there you can do all that like model based reinforcement learning planning stuff.
+SentimentType.neutral
+0.78301287
+Timestamp: 742657 - 748113
+I don't know.
+SentimentType.neutral
+0.56667316
+Timestamp: 748289 - 748713
+But yeah, so it seems like something interesting, this planning thing.
+SentimentType.positive
+0.92416126
+Timestamp: 748729 - 751817
+I don't, I don't know if we're going to be doing too much planning in our agent rags for the time being, but it's definitely kind of an interesting topic.
+SentimentType.positive
+0.86423796
+Timestamp: 751841 - 759001
+So I think maybe more practically the next topic would be this multi agent systems we're seeing.
+SentimentType.neutral
+0.83354497
+Timestamp: 759073 - 765105
+Crewai, you looked into OpenAI Swarm and you did this research about the.
+SentimentType.neutral
+0.8677035
+Timestamp: 765145 - 769737
+I think it's like a customer support agent.
+SentimentType.neutral
+0.75101745
+Timestamp: 769881 - 771945
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 772025 - 772257
+Could you tell us more about.
+SentimentType.neutral
+0.86326414
+Timestamp: 772281 - 773369
+Yeah, Multi agent and these kind of systems.
+SentimentType.neutral
+0.7710125
+Timestamp: 773497 - 776937
+Yeah, of course.
+SentimentType.neutral
+0.5765856
+Timestamp: 777121 - 777745
+So you have the single agent and then multi agent.
+SentimentType.neutral
+0.85907644
+Timestamp: 777785 - 780073
+So with single agent you just have one language model that is making the calls to the different functions and then it'll send it to the next language model to kind of like summarize the response if needed.
+SentimentType.neutral
+0.8949453
+Timestamp: 780089 - 791867
+But with a multi agent system you can have the top level agent and then you can have sub level agents that are each specialized in like a niche kind of category.
+SentimentType.neutral
+0.8783541
+Timestamp: 792011 - 802979
+So you can have like your webiate collection A and then you're also your rebate collection B.
+SentimentType.neutral
+0.8686472
+Timestamp: 803027 - 807651
+Like it's like two separate topics but then you can also have like the web search and then another tool I guess and the top level agent will call the necessary ones in parallel and each sub level agent can have its own resources.
+SentimentType.neutral
+0.87866503
+Timestamp: 807683 - 826317
+And I think that's like kind of similar to the thinking or like the design of with DSPY of how like you're breaking down the programs into like the signatures and you're like this is all you're going to do and this is all you're going to focus on.
+SentimentType.neutral
+0.8410257
+Timestamp: 826501 - 844749
+I think that's really cool.
+SentimentType.positive
+0.9873652
+Timestamp: 844797 - 846101
+And one other thing with the multi agent kind of design is you can have different language models for each.
+SentimentType.neutral
+0.7864051
+Timestamp: 846253 - 853937
+And why I think that is so cool is because if you just have your weaviate collection maybe you could just use like a pretty small language model but let's say it's like a more open ended agent.
+SentimentType.positive
+0.95912665
+Timestamp: 854081 - 865769
+So maybe like that top level one or even the final language model it can be like a powerful model that you would want to assign to that because it's like more broad.
+SentimentType.neutral
+0.55944276
+Timestamp: 865817 - 876445
+It might need to have like just more intelligence I guess.
+SentimentType.neutral
+0.7750866
+Timestamp: 876525 - 880705
+So that's like kind of the multi agent design is just having different language models, each with their own tools and resources.
+SentimentType.neutral
+0.8563005
+Timestamp: 881325 - 890625
+Awesome.
+SentimentType.positive
+0.9184248
+Timestamp: 891405 - 891797
+Yeah, I think there are so many interesting nuggets in that.
+SentimentType.positive
+0.9528837
+Timestamp: 891821 - 894029
+Yeah, it definitely seems like that's the dominant architecture of the multi agent thing is like GPT 4.
+SentimentType.neutral
+0.7704148
+Timestamp: 894157 - 899312
+0 or 01 is the, you know, the controlling the orchestrator node and then you've got say llama.
+SentimentType.neutral
+0.8853627
+Timestamp: 899369 - 904899
+Llama 8B's is the, they do some particular role role I guess is the multi agent way of thinking about it.
+SentimentType.neutral
+0.9119079
+Timestamp: 904987 - 911395
+And I really like how you bring up dspy.
+SentimentType.positive
+0.94943255
+Timestamp: 911475 - 913491
+Like you could think of the role being a prompt and you kind of learn to, you know, you tweak that prompt to have the LLM perfectly embody that role that it's supposed to serve.
+SentimentType.neutral
+0.7398258
+Timestamp: 913523 - 924459
+And then I had so many ideas.
+SentimentType.neutral
+0.6558802
+Timestamp: 924627 - 926099
+I, I like the you mentioned, letta earlier I think we have to talk talk more about Letta in the multi agent framework because I think it's so interesting this Letta is this framework based on memgbt for people who don't know that does this like meta memory thing.
+SentimentType.positive
+0.9526187
+Timestamp: 926147 - 940477
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 940581 - 940997
+So let updates the conversation history or it updates its memory based off of conversation history with the user.
+SentimentType.neutral
+0.8970845
+Timestamp: 941061 - 948677
+And why that is interesting is because let's say I've introduced myself to this chatbot saying that my name is Erica Guardinez and I'm a developer advocate@web8.
+SentimentType.positive
+0.90347254
+Timestamp: 948821 - 961375
+Now the next time I introduce myself I'm going to say hi, I'm Erica Codenas and I am a technology partner manager.
+SentimentType.neutral
+0.8220475
+Timestamp: 961715 - 968011
+Now it's going to update its memory with my new job title and it's going to keep that.
+SentimentType.neutral
+0.79286855
+Timestamp: 968043 - 974095
+It's going to, it's like a stateful agent because it's able to update its memory based off of conversation history.
+SentimentType.neutral
+0.81909984
+Timestamp: 974835 - 981027
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 981131 - 981411
+And that I think that idea of having the short term long term memory separation where short term memory memory is something that's always in the prompt and it's so critical to this function calling loop thing because as it's calling functions and seeing the results it needs to be have this, you know, memory right in the prompt of the results of these functions.
+SentimentType.neutral
+0.7999556
+Timestamp: 981443 - 999551
+So adding this kind of meta thing.
+SentimentType.neutral
+0.8085831
+Timestamp: 999623 - 1001639
+But yeah, it's super interesting this short term, long term memory distinction in the agent designs.
+SentimentType.positive
+0.9487652
+Timestamp: 1001687 - 1007831
+But I really, I kind of really want to go further into how the Letta approach maybe differs from the DSPY approach.
+SentimentType.neutral
+0.83215654
+Timestamp: 1007863 - 1015063
+I think they're quite similar.
+SentimentType.positive
+0.69299793
+Timestamp: 1015119 - 1016215
+They're both kind of like you're learning from data to optimize either the prompts sort of in this DSPY where you kind of have this like training test set.
+SentimentType.neutral
+0.8705257
+Timestamp: 1016255 - 1025275
+But with Letta and I see these multi agent systems, if I have a multi agent system where I have like the CEO agent and then I have like a team of marketers and a team of engineers or whatever and they start off with some initial role and it's like as we're doing tasks let can just like update the internal memory of each of the agents and they kind of like learn how to play their role through their experience and through the Letta framework.
+SentimentType.neutral
+0.86188066
+Timestamp: 1025315 - 1050465
+Yes.
+SentimentType.positive
+0.46103898
+Timestamp: 1050545 - 1051209
+Maybe.
+SentimentType.neutral
+0.60505456
+Timestamp: 1051377 - 1051801
+How do you think about that?
+SentimentType.neutral
+0.8326504
+Timestamp: 1051873 - 1052769
+Kind of like the way that Letta thinks about evolving this multi agent system.
+SentimentType.neutral
+0.77625555
+Timestamp: 1052817 - 1058045
+Can I actually go back and ask you a question?
+SentimentType.neutral
+0.85532075
+Timestamp: 1058705 - 1061537
+Is that allowed?
+SentimentType.neutral
+0.7786449
+Timestamp: 1061601 - 1062565
+Yeah, it's allowed.
+SentimentType.neutral
+0.5979996
+Timestamp: 1063825 - 1065097
+Okay.
+SentimentType.neutral
+0.58435154
+Timestamp: 1065281 - 1066085
+For the memory component.
+SentimentType.neutral
+0.79994357
+Timestamp: 1066905 - 1070145
+Would you.
+SentimentType.neutral
+0.67294586
+Timestamp: 1070305 - 1070993
+Do you think it makes more sense to have the vector database as the long term memory or as a tool.
+SentimentType.neutral
+0.8794786
+Timestamp: 1071089 - 1078005
+Well, I think, I think the interesting thing here is like I guess the agents.
+SentimentType.positive
+0.60879767
+Timestamp: 1079675 - 1085615
+Yeah, yeah, it's a great question.
+SentimentType.positive
+0.9229081
+Timestamp: 1086715 - 1088379
+And then you have agentic rag on the agent's internal memory.
+SentimentType.neutral
+0.6229447
+Timestamp: 1088427 - 1092295
+That's probably the best way to do it, I guess at the agent, it's like you think about what kind of metadata does it have?
+SentimentType.positive
+0.6082015
+Timestamp: 1093475 - 1098363
+Like if it receives a message, it's always just kind of receiving messages and sending responses.
+SentimentType.neutral
+0.8156037
+Timestamp: 1098419 - 1103563
+Right.
+SentimentType.neutral
+0.56647503
+Timestamp: 1103619 - 1103811
+So that's kind of like the history it's tracking.
+SentimentType.neutral
+0.7809914
+Timestamp: 1103843 - 1106055
+So if it's, if it's got this like metadata on, you know, last heroes, my messages from last week compared to two weeks ago, it can probably use that to.
+SentimentType.neutral
+0.8726812
+Timestamp: 1106355 - 1116979
+And maybe it also keeps a memory of the, of the internal state.
+SentimentType.neutral
+0.8778206
+Timestamp: 1117107 - 1120947
+You're actually reminding me that we have more work to do on our actual integration with Leto with weaviate.
+SentimentType.neutral
+0.60040754
+Timestamp: 1120971 - 1125643
+But I look forward to learning more about those kind of details and how let us thinking about architecting that kind of thing.
+SentimentType.positive
+0.81683964
+Timestamp: 1125699 - 1132703
+I think they have a lot of opportunity to innovate on that kind of thing.
+SentimentType.positive
+0.7623113
+Timestamp: 1132719 - 1136719
+So yeah, so maybe let's talk about the state of evaluation.
+SentimentType.neutral
+0.832731
+Timestamp: 1136767 - 1139327
+Kind of like how do you generally feel like the AI market is sort of shaping out with evaluation?
+SentimentType.neutral
+0.8790511
+Timestamp: 1139431 - 1144515
+Yeah, a lot of companies have with observability and evals, they've raised a lot of money.
+SentimentType.neutral
+0.657811
+Timestamp: 1145855 - 1152199
+So I think there's obviously a lot of research going into them.
+SentimentType.neutral
+0.79502606
+Timestamp: 1152247 - 1155875
+Of course you have Arises, Telemetry, Phoenix.
+SentimentType.neutral
+0.748282
+Timestamp: 1156295 - 1160733
+It's pretty cool to be able to see the calls that are being made to these.
+SentimentType.positive
+0.96707416
+Timestamp: 1160909 - 1165105
+The call to track trace.
+SentimentType.neutral
+0.8093243
+Timestamp: 1166365 - 1168301
+Trace the calls that are being sent to the language model.
+SentimentType.neutral
+0.83190197
+Timestamp: 1168453 - 1172309
+Because like you said earlier, I do think when you have built an agent system, it's really important to see what's going on underneath the hood because it's not quick.
+SentimentType.neutral
+0.6942828
+Timestamp: 1172357 - 1181413
+So what these tools are offering is being able to kind of track and see what's happening under the hood.
+SentimentType.neutral
+0.85353225
+Timestamp: 1181589 - 1188907
+And I had attended one talk from a user experience woman who worked at Google and how they're kind of bringing this into Vertex AI and it's like they have built their agent builder has like the prompts that you're defining.
+SentimentType.neutral
+0.4949624
+Timestamp: 1189011 - 1204323
+But then maybe if it's like breaking down a question, it will, it will tell you that I think like having the open communication with these agent systems is really important because there's a lot going on underneath the hood.
+SentimentType.neutral
+0.6208142
+Timestamp: 1204459 - 1217557
+So having tools and just like, yeah, just these different tools are really important for building these systems because yeah, people are probably getting very impatient quickly.
+SentimentType.neutral
+0.46293122
+Timestamp: 1217691 - 1228649
+Our attention span is very short.
+SentimentType.negative
+0.89158493
+Timestamp: 1228777 - 1230885
+Yeah, I think the open telemetry thing has certainly had a massive impact in working with all these frameworks and I think this will be one of the biggest use cases of generative feedback loops is we started on this thing about make it stateful and you always want to save the outputs.
+SentimentType.positive
+0.80805314
+Timestamp: 1232185 - 1246611
+I think basically the thing here is anytime you have LLM inference you want to save it probably in your database and see it later and run these kind of evaluations and all these kind of things.
+SentimentType.neutral
+0.8143152
+Timestamp: 1246713 - 1255927
+So yeah, I'd really love to transition into, well, I guess maybe quickly on that vertex agent builder nugget.
+SentimentType.positive
+0.8927173
+Timestamp: 1255951 - 1261855
+I love when you showed me that it had that kind of like I think earlier today we were talking about the function calling JSON that you have to send to define each of the tools and it has this really kind of ugly thing of like a tool, a function, a parameter, a parameter property.
+SentimentType.neutral
+0.36064604
+Timestamp: 1261975 - 1277225
+What do you think about the kind of UX for defining tools and agents?
+SentimentType.neutral
+0.8958134
+Timestamp: 1278085 - 1281645
+That seems like a huge developer experience problem right now.
+SentimentType.negative
+0.83347553
+Timestamp: 1281685 - 1284825
+Yeah, I think yeah you have the standard JSON currently, but I do think a low code or no code solution for building agents will be a huge thing especially for like broadening the reach.
+SentimentType.neutral
+0.49439
+Timestamp: 1285405 - 1297149
+I think you know like language models aren't, weren't new but ChatGPT kind of like made it where everyone can like kind of understand what it is.
+SentimentType.neutral
+0.6485688
+Timestamp: 1297277 - 1306335
+I think like having the front end for and like an easy way to build these kind of systems will be very important.
+SentimentType.positive
+0.76204115
+Timestamp: 1306875 - 1313915
+And yeah, I think Google is doing pretty good research in that.
+SentimentType.positive
+0.93277514
+Timestamp: 1313995 - 1317495
+But yeah, yeah, that's such a cool one.
+SentimentType.positive
+0.97650456
+Timestamp: 1318475 - 1321075
+I think that.
+SentimentType.neutral
+0.70850796
+Timestamp: 1321115 - 1321635
+And maybe there's something to.
+SentimentType.neutral
+0.8014135
+Timestamp: 1321675 - 1323375
+Well yeah, like where you host the tool, like where the tool actually runs.
+SentimentType.neutral
+0.69309205
+Timestamp: 1323995 - 1328483
+So like hopefully it just kind of you have your inference and your tool sort of like neatly packaged up in one runtime.
+SentimentType.positive
+0.5844109
+Timestamp: 1328579 - 1335935
+I don't even know what to call it but I think those are like two of the big developer experience problems with agents which kind of coming back into evaluation.
+SentimentType.negative
+0.7080668
+Timestamp: 1335975 - 1343711
+Observability.
+SentimentType.neutral
+0.7313053
+Timestamp: 1343783 - 1344463
+I'd love to talk more.
+SentimentType.positive
+0.9621797
+Timestamp: 1344559 - 1345911
+We talked about observability and yeah, we love the visualization from Arise AI and Phoenix, this tracing tool and how it lets you see the call, see the traces when you wrap them into like agent or compound AI system structures and just keep it all in the same place.
+SentimentType.positive
+0.94607645
+Timestamp: 1346063 - 1360619
+I love to talk about LLM as judge and evaluations.
+SentimentType.positive
+0.8758031
+Timestamp: 1360747 - 1363955
+I know you love to talk about how, you know how silly it is that you could run the same inference five times and get five different results.
+SentimentType.neutral
+0.4439467
+Timestamp: 1363995 - 1372579
+So what do you think about LLM is judge and Sort of how that's evolving.
+SentimentType.neutral
+0.89861596
+Timestamp: 1372747 - 1377147
+I don't think using the language model solely is as reliable as people think, obviously with having like the temperature set or just not set.
+SentimentType.negative
+0.5816274
+Timestamp: 1377291 - 1389147
+I've never seen people like set the temperature in their applications, kind of just like whatever the default is.
+SentimentType.negative
+0.60167557
+Timestamp: 1389251 - 1394451
+So that's probably like one problem with using the LLMs as judge.
+SentimentType.negative
+0.76258373
+Timestamp: 1394563 - 1399675
+And I remember on the Nils Reimers podcast he had talked about, you know, you can't really evaluate a system that is using the Cohere models and then use the OpenAI model as a judge because it's gonna have like biases obviously.
+SentimentType.neutral
+0.48430377
+Timestamp: 1399715 - 1416235
+So I think there needs.
+SentimentType.neutral
+0.807921
+Timestamp: 1416395 - 1417043
+I think that idea is crazy though.
+SentimentType.negative
+0.71997255
+Timestamp: 1417059 - 1418427
+How does cohere know that the response.
+SentimentType.neutral
+0.70028245
+Timestamp: 1418451 - 1420963
+I guess that's how subtle the patterns are.
+SentimentType.neutral
+0.7971131
+Timestamp: 1421019 - 1424163
+That reminds me of.
+SentimentType.neutral
+0.76146805
+Timestamp: 1424219 - 1424971
+I saw this meme on Twitter and it's like how it feels to be a latent vector in a transformer.
+SentimentType.neutral
+0.74335957
+Timestamp: 1425003 - 1431307
+And it's kind of like, you know, he's like, why?
+SentimentType.neutral
+0.72392535
+Timestamp: 1431331 - 1432947
+It's like a gravity turned off.
+SentimentType.negative
+0.5475847
+Timestamp: 1432971 - 1434171
+It's like flying upside down.
+SentimentType.positive
+0.64867246
+Timestamp: 1434203 - 1435451
+But the idea that GPT4 could tell that the responses from GPT4.0, that's pretty crazy.
+SentimentType.neutral
+0.51839733
+Timestamp: 1435483 - 1442617
+1.
+SentimentType.neutral
+0.52643746
+Timestamp: 1442641 - 1442777
+And I love that nugget about the ensembling.
+SentimentType.positive
+0.94071746
+Timestamp: 1442801 - 1445169
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1445217 - 1445353
+So what do you think?
+SentimentType.neutral
+0.81150687
+Timestamp: 1445369 - 1446185
+What?
+SentimentType.neutral
+0.5652863
+Timestamp: 1446305 - 1446561
+What do you think, you know, continuing on this like ensembling inference thing.
+SentimentType.neutral
+0.7902692
+Timestamp: 1446593 - 1450641
+I remember earlier we had looked into that paper.
+SentimentType.neutral
+0.8910901
+Timestamp: 1450673 - 1453217
+Are more agents all you need?
+SentimentType.neutral
+0.8552347
+Timestamp: 1453401 - 1454945
+That's saying at each step, just sample like 25 generations of the same prompt.
+SentimentType.neutral
+0.844466
+Timestamp: 1454985 - 1461113
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1461289 - 1461577
+Do you think that's.
+SentimentType.neutral
+0.8225371
+Timestamp: 1461601 - 1462337
+What do you think about that?
+SentimentType.neutral
+0.8296126
+Timestamp: 1462401 - 1463273
+Well, I think sampling from the language model, maybe like 20 is a secret spot.
+SentimentType.neutral
+0.87685585
+Timestamp: 1463369 - 1469545
+I don't really know because.
+SentimentType.neutral
+0.65432775
+Timestamp: 1469585 - 1471163
+Yeah, like you said, with the more agents is all you need.
+SentimentType.neutral
+0.79897225
+Timestamp: 1471219 - 1474735
+I guess there was to a certain point where you don't need more agents.
+SentimentType.neutral
+0.72027284
+Timestamp: 1475955 - 1479411
+There was a rebuttal to it.
+SentimentType.neutral
+0.8081768
+Timestamp: 1479563 - 1481455
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1482995 - 1483435
+So I think, I think that that's perfect nugget for LM as judge is to run the inference 20 times and.
+SentimentType.positive
+0.6953433
+Timestamp: 1483475 - 1491067
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1491251 - 1491595
+And get a more robust result that way.
+SentimentType.neutral
+0.50217956
+Timestamp: 1491635 - 1493667
+But I guess the interesting thing about that paper is that they show that just sample it many times.
+SentimentType.positive
+0.7511429
+Timestamp: 1493691 - 1498655
+They separate between easy and hard with like, I think it's chemistry questions or physics questions.
+SentimentType.neutral
+0.84705514
+Timestamp: 1498735 - 1504391
+And so they're able to say that that doesn't work for the hard questions, but it does work for the easy questions, which I think is, you know, another one of those mind bending, who knows how that actually works type of things.
+SentimentType.neutral
+0.58559686
+Timestamp: 1504543 - 1514275
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1514775 - 1515159
+Awesome.
+SentimentType.positive
+0.9184248
+Timestamp: 1515207 - 1515431
+So I think that was a pretty good roundup of agents.
+SentimentType.positive
+0.9426953
+Timestamp: 1515463 - 1517911
+We've got all these topics around function calling and you know we've got the user experience for how you define your tools.
+SentimentType.neutral
+0.73855436
+Timestamp: 1517943 - 1524399
+This idea of the function calling loop, we've got ideas like using the DSPY avatar optimizer to optimize the description of the tool and then we've got all these things like what planning might look like, what multi agent systems might look like and this letta idea, we really think this is interesting, this short term memory idea and then of course how observability and evaluation changes.
+SentimentType.positive
+0.8547635
+Timestamp: 1524447 - 1544691
+So now kind of an anchoring topic that we're really excited about is sort of how we VA is leveraging agentic agentic systems with generative feedback loops.
+SentimentType.positive
+0.9538407
+Timestamp: 1544723 - 1554853
+Eric, could you kick us off by describing how you see the role of agents in generative feedback loops?
+SentimentType.neutral
+0.89843976
+Timestamp: 1554989 - 1559465
+Sure, yeah.
+SentimentType.positive
+0.5765458
+Timestamp: 1560285 - 1561221
+So obviously generative feedback loops is something near and dear to our hearth at weaviate and why agents play a role in gfls is because it's able to maybe generate new synthetic data, it's able to categorize your data maybe for model training there's like a variety of applications where GFLs play a role and kind of having like an agent system under the hood I think gives it a lot of autonomy and also just the results are better in my opinion other than like rather than just like doing rag to you know generate new data based off of the context.
+SentimentType.positive
+0.7060433
+Timestamp: 1561293 - 1607115
+I do think that having it being able to you know, maybe do a web search but then also see your rebate collection kind of like this loop process is interesting for GFL specifically.
+SentimentType.positive
+0.875669
+Timestamp: 1607625 - 1620993
+Well yeah, I'd love to.
+SentimentType.positive
+0.8888418
+Timestamp: 1621089 - 1622113
+Another thing we had looked into was this storm system from Stanford and now we've seen Obviously I think OpenAI's 01 is what's going to push the public adoption of these long running processes that produce some kind of thing And I can't wait for the same kind of system of like a mid journey 01 where I say I want my robot we v8 gorilla visual and it is like all right, I'll see you in the morning.
+SentimentType.positive
+0.748508
+Timestamp: 1622209 - 1646391
+I'll be working on this all night and I'll have a, you know a bunch of these pictures to show you in the morning.
+SentimentType.neutral
+0.7906326
+Timestamp: 1646423 - 1651703
+Yeah, can you maybe talk more about how you see this like yeah like long running process for generative feedback loops to you know create stuff with AI?
+SentimentType.neutral
+0.86162645
+Timestamp: 1651879 - 1663195
+Yeah, I mean I don't think, I think yeah the latency is obviously like a huge concern but I'd say yeah if you want your webiate branded gorilla with like looking super techno and like these specific Details.
+SentimentType.neutral
+0.67039424
+Timestamp: 1664895 - 1680439
+Yeah, that's not going to take a minute.
+SentimentType.neutral
+0.57415986
+Timestamp: 1680607 - 1682255
+Maybe give it like a few hours to generate it.
+SentimentType.neutral
+0.86432683
+Timestamp: 1682335 - 1685839
+And similarly to Storm, you know, it's doing that thorough research before generating the report on a topic.
+SentimentType.neutral
+0.8117874
+Timestamp: 1685967 - 1692413
+Or even like our example of building a DSPY program to generate a new blog post from my query, you know, it was like write an outline.
+SentimentType.neutral
+0.87458134
+Timestamp: 1692519 - 1701525
+What was it?
+SentimentType.neutral
+0.7879168
+Timestamp: 1702305 - 1702937
+Oh, it was research, Write an outline, generate the content and then now give, give it a title.
+SentimentType.neutral
+0.8388125
+Timestamp: 1702961 - 1708161
+It's like a four layer DSPY program.
+SentimentType.neutral
+0.8282743
+Timestamp: 1708193 - 1710921
+You know that it wasn't fast but it was a pretty good blog post.
+SentimentType.positive
+0.9434503
+Timestamp: 1711073 - 1716561
+And I think that's like the difference in these kind of systems compared to like a chatbot where it can be just be like, you wanna know what hybrid search is?
+SentimentType.neutral
+0.78348035
+Timestamp: 1716633 - 1726275
+Boom.
+SentimentType.neutral
+0.48060954
+Timestamp: 1726315 - 1726619
+This is my answer.
+SentimentType.neutral
+0.577717
+Timestamp: 1726667 - 1727739
+These are kind of like, you know, you really have to think about what you need to build.
+SentimentType.neutral
+0.78560597
+Timestamp: 1727907 - 1732443
+Then you'd access the tools to build it and then you need to make sure that it's right and then like kind of like have that whole flow going.
+SentimentType.neutral
+0.8506466
+Timestamp: 1732499 - 1741295
+Yeah, yeah, epic.
+SentimentType.positive
+0.70636314
+Timestamp: 1742555 - 1744573
+And I guess for me the external tools thing, I remember I was working with Charles on the Recommend IT recommender system and it was like we had this data set called X wines.
+SentimentType.neutral
+0.85582286
+Timestamp: 1744629 - 1754221
+Like wine data sets got features like the abbreviate, you know, the alcohol content, like what type of wine it is, where it comes from and stuff like that.
+SentimentType.neutral
+0.86625946
+Timestamp: 1754293 - 1761261
+And I wanted to add you know like a description of the wine just so I could benchmark this kind of like feature representation learning versus the text embeddings.
+SentimentType.neutral
+0.8662843
+Timestamp: 1761293 - 1769621
+And so that's when I first kind of connected it to the web search to add this data about the wines.
+SentimentType.neutral
+0.87671655
+Timestamp: 1769773 - 1774549
+Like could you do the web search to describe like what is Chardonnay?
+SentimentType.neutral
+0.8936923
+Timestamp: 1774597 - 1778405
+And I think that kind of thing of using, you know, maybe it's like a stock price and you want to say hey, what's Nvidia at today?
+SentimentType.neutral
+0.8641651
+Timestamp: 1778565 - 1785045
+Stuff like that.
+SentimentType.neutral
+0.59787625
+Timestamp: 1785205 - 1786309
+How about human and loop is also something that we maybe should have touched on in the eval and observability section.
+SentimentType.neutral
+0.8672499
+Timestamp: 1786477 - 1793525
+Because I do think, you know, I think it was like auto GPT like in 2023 of like March, people were like eh, I don't really want to let like give you access to my laptop.
+SentimentType.negative
+0.64415926
+Timestamp: 1793645 - 1806027
+Like that's kind of weird.
+SentimentType.negative
+0.89101
+Timestamp: 1806091 - 1807695
+So I do think there needs to be some human in the loop kind of intervention where you can like, like no, you're taking it too far.
+SentimentType.negative
+0.590734
+Timestamp: 1808035 - 1815139
+You're generating too many emails based off of my history or something.
+SentimentType.negative
+0.54256415
+Timestamp: 1815227 - 1819323
+I don't know.
+SentimentType.neutral
+0.56667316
+Timestamp: 1819379 - 1819987
+But I think it's Important to be able to like, cut it, like, you know, take out the cord for some of these systems and bring the autonomy back a little bit and have the human lead rather than the agent.
+SentimentType.neutral
+0.8022842
+Timestamp: 1820091 - 1831325
+Yeah, I really like that.
+SentimentType.positive
+0.9360919
+Timestamp: 1832705 - 1833777
+I think that kind of.
+SentimentType.neutral
+0.7916181
+Timestamp: 1833801 - 1835005
+Well, that's what I.
+SentimentType.neutral
+0.7444185
+Timestamp: 1835345 - 1836177
+That's what I like about the kind of like, generative feedback loops.
+SentimentType.positive
+0.8421853
+Timestamp: 1836241 - 1839705
+I always try to, like, make sense of what the loops abstraction part of it means.
+SentimentType.neutral
+0.7937223
+Timestamp: 1839745 - 1843833
+And I think there's something to the AI generate some data, you give some human feedback, and then that's kind of the loop.
+SentimentType.neutral
+0.8848625
+Timestamp: 1843889 - 1849841
+Or of course, it's just this loop of like, the database is always providing the data to the LLM generative model to then produce the thing that it then saves back and then will be used in the future.
+SentimentType.neutral
+0.8195323
+Timestamp: 1849913 - 1860177
+Or the loop is like, this is how AI models are created, is the kind of like, data in AI.
+SentimentType.neutral
+0.83903694
+Timestamp: 1860321 - 1865425
+And I did have one question.
+SentimentType.neutral
+0.78635436
+Timestamp: 1865465 - 1867673
+Oh, interject, interject.
+SentimentType.neutral
+0.57603204
+Timestamp: 1867809 - 1871817
+Nice word choice.
+SentimentType.positive
+0.61247957
+Timestamp: 1871921 - 1873125
+This comes back to the.
+SentimentType.neutral
+0.8253737
+Timestamp: 1874705 - 1877125
+The tree of thought conversation.
+SentimentType.neutral
+0.8566837
+Timestamp: 1877975 - 1881915
+And what if we.
+SentimentType.neutral
+0.7997126
+Timestamp: 1882575 - 1884151
+Like, as you're making.
+SentimentType.neutral
+0.80203843
+Timestamp: 1884263 - 1886271
+As you're logging the traces that are being observed in like, Phoenix or any of these tools or frameworks, what if the.
+SentimentType.neutral
+0.90403837
+Timestamp: 1886383 - 1895847
+You use the stored outputs to further, like, split the trees and then go from there?
+SentimentType.neutral
+0.8868357
+Timestamp: 1895951 - 1903079
+Like, maybe you're not always starting from zero.
+SentimentType.neutral
+0.743299
+Timestamp: 1903167 - 1905493
+You could kind of like, store the past.
+SentimentType.neutral
+0.8236692
+Timestamp: 1905679 - 1908925
+Yep.
+SentimentType.neutral
+0.5606555
+Timestamp: 1910065 - 1910977
+I don't know.
+SentimentType.neutral
+0.56667316
+Timestamp: 1911161 - 1912009
+The thought isn't.
+SentimentType.neutral
+0.6170021
+Timestamp: 1912137 - 1913241
+It's not fully there, but kind of.
+SentimentType.neutral
+0.79128426
+Timestamp: 1913353 - 1915289
+Yeah.
+SentimentType.neutral
+0.5491449
+Timestamp: 1915417 - 1916125
+I think what you're getting at is this is kind of an interesting thing about a compound system or like an agent that's completing some task that's like, so complicated.
+SentimentType.positive
+0.53820455
+Timestamp: 1916665 - 1925625
+It needs to save the intermediate parts, like, just in order to finish doing this thing.
+SentimentType.neutral
+0.72981274
+Timestamp: 1925705 - 1930969
+Like if you say, write a research paper or write a rebuttal to.
+SentimentType.neutral
+0.8321951
+Timestamp: 1931017 - 1935771
+Let me speak freely.
+SentimentType.neutral
+0.6953054
+Timestamp: 1935803 - 1937055
+Last podcast.
+SentimentType.neutral
+0.79212755
+Timestamp: 1937915 - 1938747
+And it's going to need to write code, save that code back into, say it uses its code in the database to manage the experiments and it runs the experiment, saves those back into this thing.
+SentimentType.neutral
+0.7930862
+Timestamp: 1938811 - 1949835
+And so the agent, which is the implementation of the generative feedback loop, needs to use generative feedback loops to do the thing.
+SentimentType.neutral
+0.837083
+Timestamp: 1949875 - 1960235
+Yeah, exciting.
+SentimentType.positive
+0.95613563
+Timestamp: 1960815 - 1962263
+So that really brings the loops part into it.
+SentimentType.neutral
+0.8074634
+Timestamp: 1962439 - 1965935
+Like, it can't just be like, yeah, like it.
+SentimentType.neutral
+0.5186083
+Timestamp: 1965975 - 1968775
+Okay, I love this.
+SentimentType.positive
+0.98214746
+Timestamp: 1968895 - 1970167
+Generative feedback loops is more than just like, save the data with the LLM.
+SentimentType.neutral
+0.69861215
+Timestamp: 1970231 - 1974175
+It's like more of this.
+SentimentType.neutral
+0.71809757
+Timestamp: 1974215 - 1975607
+Yeah, it's pretty cool.
+SentimentType.positive
+0.97859395
+Timestamp: 1975751 - 1976719
+It's probably like just the start of further developing a system.
+SentimentType.neutral
+0.76513827
+Timestamp: 1976767 - 1981471
+Like, it starts with the general feedback loop is like kind of like the start to building a more complex kind of pipeline, that kind of AI native business where, like your businesses, you do an AI model for some particular thing.
+SentimentType.neutral
+0.79323775
+Timestamp: 1981543 - 1993949
+The generative feedback loops can produce the training data to get you kicked off with such a model.
+SentimentType.neutral
+0.8644001
+Timestamp: 1994117 - 1998725
+Now you have the training data to get that done and get that started.
+SentimentType.neutral
+0.76606137
+Timestamp: 1998765 - 2002293
+And.
+SentimentType.neutral
+0.6189412
+Timestamp: 2002349 - 2002945
+Yeah, nice.
+SentimentType.positive
+0.84159684
+Timestamp: 2003365 - 2005425
+Very cool.
+SentimentType.positive
+0.9677404
+Timestamp: 2005965 - 2006741
+Awesome.
+SentimentType.positive
+0.9184248
+Timestamp: 2006853 - 2007141
+So Erica will be in New York City next Tuesday.
+SentimentType.neutral
+0.9287934
+Timestamp: 2007173 - 2010825
+And.
+SentimentType.neutral
+0.61894125
+Timestamp: 2013045 - 2013525
+Yeah, awesome.
+SentimentType.positive
+0.9367395
+Timestamp: 2013605 - 2014445
+Talk about agentic Rag.
+SentimentType.neutral
+0.7263498
+Timestamp: 2014485 - 2015781
+Thank you so much for joining the podcast.
+SentimentType.positive
+0.98913354
+Timestamp: 2015853 - 2017461
+Thank you for having me.
+SentimentType.positive
+0.97090584
+Timestamp: 2017653 - 2018605

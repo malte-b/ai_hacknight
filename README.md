@@ -1,5 +1,7 @@
 # ai_hacknight
 
+Disclaimer: This repo was built during the AI Hack Night in Berlin on December 12, 2024.
+
 ## Assembly AI Challenge
 
 Number of sentences: 363
